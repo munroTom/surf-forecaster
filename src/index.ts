@@ -1,7 +1,9 @@
 import scrapeMagicSeaweed from "./magic-seaweed";
+// import data from "../stubbed-data.json";
 import { getGoodBegginerPaddleboardingWindows } from "./magic-seaweed/paddeboarding";
+import { getGoodSurfWindows } from "./magic-seaweed/surfing";
 import { composeMessage } from "./messages/composeMessage";
-import { formatForecastMessage } from "./messages/formatMessage";
+import { groupForecasts } from "./messages/formatMessage";
 
 main().catch((err) => {
   console.error(err);
@@ -13,9 +15,14 @@ async function main() {
 
   const paddleboarding = getGoodBegginerPaddleboardingWindows(data);
 
-  const paddleboardingMessages = paddleboarding.map(formatForecastMessage);
+  const surfing = getGoodSurfWindows(data);
 
-  const message = composeMessage(paddleboardingMessages);
+  const paddleboardingMessages = groupForecasts(paddleboarding);
+  const surfingMessages = groupForecasts(surfing);
+
+  const message = composeMessage({ paddleboardingMessages, surfingMessages });
 
   console.log(message);
+
+  console.log(message.length);
 }

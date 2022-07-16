@@ -1,19 +1,26 @@
-export function composeMessage(paddleboardingMessages: string[]): string {
-  if (!shouldComposeMessage(paddleboardingMessages)) {
-    return `No good forecasts coming up :(`;
+export function composeMessage({
+  surfingMessages,
+}: {
+  paddleboardingMessages: string[];
+  surfingMessages: string[];
+}): string {
+  if (!shouldComposeMessage([...surfingMessages])) {
+    return "";
   }
 
-  return `Looks like there's some good forecasts coming up!
+  return `Check the forecast!
+https://magicseaweed.com/Tynemouth-Longsands-Surf-Report/26/
 
 ${
-  paddleboardingMessages.length > 0
-    ? `For paddleboarding:
-    ${paddleboardingMessages.join(`
-    `)}`
+  surfingMessages.length > 0
+    ? `Surfing:
+${surfingMessages.join(`
+`)}
+    `
     : ""
 }`;
 }
 
-function shouldComposeMessage(paddleboardingMessages: string[]): boolean {
-  return paddleboardingMessages.length > 0;
+function shouldComposeMessage(messages: string[]): boolean {
+  return messages.length > 0;
 }
