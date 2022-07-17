@@ -20,4 +20,4 @@ functions:
   alert:
     handler: src/index.handler
     events:
-      - schedule: cron(0 19 * * SUN,WED *)
+      - schedule: cron(0 19 ? * SUN,WED *)
