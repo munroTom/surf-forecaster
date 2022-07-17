@@ -1,0 +1,23 @@
+service: surf-alerter
+frameworkVersion: "3"
+
+plugins:
+  - serverless-plugin-typescript
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: prod
+  region: eu-west-2
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action: "SNS:Publish"
+          Resource: "arn:aws:sns:eu-west-2:563834555809:good-surf-sms"
+
+functions:
+  alert:
+    handler: src/index.handler
+    events:
+      - schedule: cron(0 19 * * SUN,WED *)
