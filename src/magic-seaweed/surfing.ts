@@ -8,7 +8,7 @@ export function getGoodSurfWindows(data: MagicSeaweedData) {
 }
 
 function hasGoodRating(forecast: Forecast): boolean {
-  return forecast.fadedRating > 0;
+  return forecast.fadedRating > 0 || forecast.solidRating > 0;
 }
 
 function periodIsLongEnough(swell: Swell): boolean {
